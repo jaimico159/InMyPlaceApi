@@ -1,0 +1,6 @@
+{
+  "name": "beynd-api",
+  "scripts": {
+    "postdeploy": "rails db:schema:load && rails db:seed"
+  }
+}
