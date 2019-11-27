@@ -1,5 +1,15 @@
 # frozen_string_literal: true
 
 class SessionsController < ApplicationController
-  def verify; end
+  # POST -> email, password
+  # /sessions/validate
+  def validate
+    user = User.find_by_email(params[:email])
+
+    if user&.valid_password?(params[:password])
+      json_response(user)
+    else
+      json_response({}, :not_found)
+    end
+  end
 end
