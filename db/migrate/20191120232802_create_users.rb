@@ -8,6 +8,7 @@ class CreateUsers < ActiveRecord::Migration[5.2]
       t.string :phone
       t.string :dni
       t.integer :status
+      t.string :ruc
 
       t.timestamps
     end

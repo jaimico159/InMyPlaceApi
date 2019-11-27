@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CreateEstablishments < ActiveRecord::Migration[5.2]
   def change
     create_table :establishments do |t|
@@ -7,6 +9,7 @@ class CreateEstablishments < ActiveRecord::Migration[5.2]
       t.integer :status
       t.text :description
       t.references :user, foreign_key: true
+      t.integer :establishment_status
 
       t.timestamps
     end

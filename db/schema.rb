@@ -22,6 +22,7 @@ ActiveRecord::Schema.define(version: 2019_11_27_031821) do
     t.integer "status"
     t.text "description"
     t.bigint "user_id"
+    t.integer "establishment_status"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_establishments_on_user_id"
@@ -33,6 +34,7 @@ ActiveRecord::Schema.define(version: 2019_11_27_031821) do
     t.string "phone"
     t.string "dni"
     t.integer "status"
+    t.string "ruc"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "email", default: "", null: false
