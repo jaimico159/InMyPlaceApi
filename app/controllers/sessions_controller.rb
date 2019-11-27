@@ -9,7 +9,7 @@ class SessionsController < ApplicationController
     if user&.valid_password?(params[:password])
       json_response(user)
     else
-      json_response({}, :not_found)
+      json_response({}, :unauthorized)
     end
   end
 end
