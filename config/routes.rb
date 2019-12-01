@@ -6,4 +6,5 @@ Rails.application.routes.draw do
   post '/sessions/validate', to: 'sessions#validate'
 
   resources :establishments, except: :new
+  resources :users, only: :index
 end
