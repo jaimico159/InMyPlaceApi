@@ -21,3 +21,17 @@ User.create(first_name: 'Sergio',
             phone: '+51986130678',
             dni: '70395166',
             password: 'testing')
+
+User.create(first_name: 'Aaron',
+            last_name: 'Cochachin Payva',
+            email: 'aaron@gmail.com',
+            phone: '+51986130678',
+            dni: '70395166',
+            password: 'testing')
+
+User.create(first_name: 'Marisol',
+            last_name: 'Perez Lima',
+            email: 'marisol@gmail.com',
+            phone: '+51986130678',
+            dni: '70395166',
+            password: 'testing')
