@@ -4,15 +4,18 @@ class EstablishmentsController < ApplicationController
   # get ->
   # /establishments
   def index
-    json_response(Establishments.all)
+    user = User.find(params[:user_id])
+    json_response(user.establishments)
   end
 
   # post -> params
   # /establishments
   def create
+    user = User.find(params[:user_id])
     establishment = Establishment.new(establishment_params)
+    establishment.user = user
 
-    if establishment.save(params)
+    if establishment.save!(params)
       json_response(establishment)
     else
       json_response({ error: 'Error guardando establecimiento' }, :bad_request)
@@ -22,7 +25,8 @@ class EstablishmentsController < ApplicationController
   # get ->
   # /establishments/:id
   def show
-    establishment = Establishment.find(params[:id])
+    user = User.find(params[:user_id])
+    establishment = User.establishments.where(id: params[:id]).first
     if establishment.present?
       json_response(establishment)
     else
@@ -33,7 +37,8 @@ class EstablishmentsController < ApplicationController
   # post -> params
   # /establishments/update
   def update
-    establishment = Establishment.find(params[:id])
+    user = User.find(params[:user_id])
+    establishment = User.establishments.where(id: params[:id]).first
 
     if establishment.blank?
       json_response({ error: 'Establecimiento no encontrado' }, :unprocessable_entity)
@@ -50,7 +55,8 @@ class EstablishmentsController < ApplicationController
   # delete
   # /establishments/:id
   def destroy
-    establishment = Establishment.find(params[:id])
+    user = User.find(params[:user_id])
+    establishment = User.establishments.where(id: params[:id]).first
     if establishment.destroy
       json_response(establishment)
     else
