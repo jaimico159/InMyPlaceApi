@@ -11,9 +11,9 @@ class NewsController < ApplicationController
   # post -> params
   # /establishments
   def create
-    establishment_new = New.new
+    establishment_new = New.new(new_params)
 
-    if establishment_new.save!(params)
+    if establishment_new.save!
       json_response(establishment_new)
     else
       json_response({ error: 'Error guardando noticia de establecimiento' }, :bad_request)
@@ -35,36 +35,35 @@ class NewsController < ApplicationController
   # post -> params
   # /establishments/:id
   def update
-    user = User.find(params[:user_id])
-    establishment = user.establishments.where(id: params[:id]).first
+    establishment_new = New.find(params[:id])
 
-    if establishment.blank?
-      json_response({ error: 'Establecimiento no encontrado' }, :unprocessable_entity)
+    if establishment_new.blank?
+      json_response({ error: 'Noticia de establecimiento no encontrado' }, :unprocessable_entity)
       return
     end
 
-    if establishment.update(establishment_params)
-      json_response(establishment)
+    if establishment_new.update(establishment_params)
+      json_response(establishment_new)
     else
-      json_response({ error: 'Error guardando establecimiento' }, :bad_request)
+      json_response({ error: 'Error guardando noticia de establecimiento' }, :bad_request)
     end
   end
 
   # delete
   # /establishments/:id
   def destroy
-    user = User.find(params[:user_id])
-    establishment = user.establishments.where(id: params[:id]).first
-    if establishment.destroy
-      json_response(establishment)
+    establishment_new = New.find(params[:id])
+    if establishment_new.destroy
+      json_response(establishment_new)
     else
-      json_response({ error: 'Establecimiento falló en ser eliminado' }, :bad_request)
+      json_response({ error: 'Noticia de establecimiento falló en ser eliminado' }, :bad_request)
     end
   end
 
   private
 
-  def establishment_params
-    params.fetch(:establishment, {}).permit(:name, :lat, :lng, :description, :establishment_status)
+  def new_params
+    params.fetch(:new, {}).permit(:title, :description, :published_at, :photo_url,
+                                  :establishment_id)
   end
 end
