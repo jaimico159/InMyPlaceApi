@@ -5,7 +5,7 @@ class EstablishmentsController < ApplicationController
   # /establishments
   def index
     user = User.find(params[:user_id])
-    json_response(user.establishments)
+    json_response(data: user.establishments)
   end
 
   # post -> params
