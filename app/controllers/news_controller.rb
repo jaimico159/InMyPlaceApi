@@ -5,7 +5,7 @@ class NewsController < ApplicationController
   # /establishments
   def index
     news = New.all
-    json_response(data: news)
+    json_response(data: news.as_json(include: :establishment))
   end
 
   # post -> params
